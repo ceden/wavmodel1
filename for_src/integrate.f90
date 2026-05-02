@@ -12,9 +12,6 @@ subroutine integrate
  real(real_type) :: a_tri(ks_pe:ke_pe),b_tri(ks_pe:ke_pe),c_tri(ks_pe:ke_pe)
  real(real_type) :: a_tri_all(nz),b_tri_all(nz),c_tri_all(nz),d_tri_all(nz),x_tri_all(nz)
  
- ! allow for user defined forcing
- call set_forcing()
-
  ! concentration
  conc = phi/2.0+0.5
  if (my_blk_k == 1)       conc(:,1)  = conc(:,2)
@@ -140,6 +137,9 @@ subroutine integrate
   if (my_blk_k == n_pes_k) w(:,nz-1:nz+onx)=0d0
  endif
  
+ ! allow for user defined forcing
+ call set_forcing()
+
 
 
  if (enable_AB3_time_stepping) then  
